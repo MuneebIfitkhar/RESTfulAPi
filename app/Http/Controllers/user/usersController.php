@@ -69,7 +69,49 @@ class usersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findorfail($id);
+      $rules = 
+      [
+          'email' => 'email|unique:users ,email ,' . $user->id,
+          'password' =>'min:8|confirmed',
+          'admin' => 'in:' . User::ADMIN_USER . ',' . User::REGULAR_USER,
+      ];
+     
+      $this->validate($request,$rules);
+
+      if($request->has('name'))
+      {
+          $user->name = $request->name;
+      }
+      if($request->has('email') && $user->email != $request->email)
+      {
+          $user->verified = User::UNVERIFIED_USER;
+          $user->verification_token = User::genrateVerificationCode();
+          $user->email = $request->email;
+      }
+
+      if($request->has('password'))
+      {
+          $user->password = bcrypt($request->password);           
+      }
+
+      if($request->has('admin'))
+      {
+          if(!$user->isVerified()){
+              return response()->json(['error' => 'Only verified users can modify the admin field' , 'code' => 409] , 409);
+          }
+          $user->admin = $request->admin;
+      }
+      if(!$user->isDirty())
+      {
+          return response()->json(['error' => 'You need to specify a different value to update' , 'code' => 422] , 422);
+      }
+      $user->save();
+
+      return response()->json(['data' => $user]);
+
+
+
     }
 
     /**
@@ -80,6 +122,10 @@ class usersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findorfail($id);
+
+        $user->delete();
+
+        return response()->json(['data'=> $user] , 200);
     }
 }
