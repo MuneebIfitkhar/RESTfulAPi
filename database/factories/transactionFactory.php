@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\trasection;
+use App\Models\trasaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class transectionFactory extends Factory
+class transactionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = trasection::class;
+    protected $model = trasaction::class;
 
     /**
      * Define the model's default state.

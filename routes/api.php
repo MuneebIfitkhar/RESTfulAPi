@@ -6,7 +6,7 @@ use App\Http\Controllers\Buyer\buyerController;
 use App\Http\Controllers\Categories\categoriesController;
 use App\Http\Controllers\Product\productController;
 use App\Http\Controllers\Seller\sellerController;
-use App\Http\Controllers\Trancections\transectionsController;
+use App\Http\Controllers\Transactions\transactionsController;
 use App\Http\Controllers\User\usersController;
 
 /*
@@ -24,5 +24,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });*/
 
-Route::resource('user',  UsersController::class ,['except' =>['create' , 'edit']]  );
+// user route 
+Route::resource('user',  UsersController::class ,['except' =>['create' , 'edit']]);
+
+//buyer route
+Route::resource('buyer',  buyerController::class ,['only' => ['index' , 'show']]);
+
+//seller
+Route::resource('seller',  sellerController::class ,['only' => ['index' , 'show']]);
+
+
+//catagories
+Route::resource('categories',  categoriesController::class ,['except' => ['create' , 'edit']]);
+
+//products 
+Route::resource('product',  productController::class ,['only' => ['index' , 'show']]);
+
+
+//transactions
+Route::resource('transactions ',  transactionsController::class ,['only' => ['index' , 'show']]);
+
+
 

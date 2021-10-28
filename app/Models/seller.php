@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\product; 
 
 
-class seller extends user
+class seller extends User
 {
     use HasFactory;
     public function product()

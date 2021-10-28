@@ -19,6 +19,7 @@ class User extends Authenticatable
 
     const ADMIN_USER = 'true';
     const REGULAR_USER = 'false';
+    protected $table = 'users';
 
 
     /**
@@ -69,4 +70,6 @@ class User extends Authenticatable
     {
         return Str::random(40);
     }
+    
+ 
 }

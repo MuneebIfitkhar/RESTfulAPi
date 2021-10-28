@@ -34,8 +34,8 @@ class product extends Model
         return $this->belongsTo(Seller::class);
     }
 
-    public function transections()
+    public function transactions()
     {
-        return $this->hasMany(Transection::class);
+        return $this->hasMany(Transaction::class);
     }
 }

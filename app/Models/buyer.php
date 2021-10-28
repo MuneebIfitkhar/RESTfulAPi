@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\transection;
+use App\Models\transaction;
 
-class buyer extends user
+
+class buyer extends User
 {
     use HasFactory;
 
-    public function transection()
+    public function transactions()
     {
-        return $this->hasMany(Transection::class);
+        return $this->hasMany(Transaction::class);
     }
 
 }

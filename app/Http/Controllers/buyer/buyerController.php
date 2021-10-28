@@ -4,6 +4,8 @@ namespace App\Http\Controllers\buyer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Buyer;
+use App\Models\transaction;
 
 class buyerController extends Controller
 {
@@ -14,7 +16,10 @@ class buyerController extends Controller
      */
     public function index()
     {
-        //
+        
+        $buyers = Buyer::has('transactions')->get();
+      
+        return response()->json(['date' => $buyers] ,200);
     }
 
     /**
