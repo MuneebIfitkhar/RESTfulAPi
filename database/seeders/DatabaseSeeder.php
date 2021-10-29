@@ -2,13 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Models\user;
-use App\Models\categories;
-use App\Models\product;
-use App\Models\transaction;
+use App\Models\User;
+use App\Models\Categories;
+use App\Models\Product;
+use App\Models\Transaction;
 use App\Database\Factories;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 
@@ -39,7 +40,8 @@ class DatabaseSeeder extends Seeder
 
        
         User::factory()->times($usersQuantity)->create();
-        Categories::factory()->times($categoryQuantity)->create();
+       
+       
         
         Product::factory()->times($productQuantity)->create()->each(
             function ($product){

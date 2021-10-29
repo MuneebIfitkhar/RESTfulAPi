@@ -9,6 +9,7 @@ use App\Models\product;
 class categories extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         'name', 
         'description',
