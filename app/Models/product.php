@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class product extends Model
 {
@@ -11,6 +12,9 @@ class product extends Model
     const UNAVLABLE_PRODUCT = 'unavailable';
 
     use HasFactory;
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
     protected $fillable =[
          'name',
          'descriotion',
@@ -26,7 +30,7 @@ class product extends Model
 
     public function categories() 
     {
-        return $thsi->belongsToMany(Category::class);
+        return $this->belongsToMany(Categories::class);
     }
 
     public function seller()

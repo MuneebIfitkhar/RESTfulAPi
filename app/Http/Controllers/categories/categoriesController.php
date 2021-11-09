@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\categories;
+namespace App\Http\Controllers\Categories;
 
 use App\Http\Controllers\ApiController;
+use App\Models\categories;
 use Illuminate\Http\Request;
 
-class categoriesController extends ApiController
+class CategoriesController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -14,17 +15,8 @@ class categoriesController extends ApiController
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $categories = Categories::all();
+        return $this->showALl($categories);
     }
 
     /**
@@ -35,51 +27,56 @@ class categoriesController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name'=>'required',
+            'description'=>'required',
+        ];
+
+        $this->validate($request, $rules);
+        $newCategory = Categories::create($request->all());
+
+        return $this->showOne($newCategory , 201);
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Categories $categories)
     {
-        //
+        $categories = Categories::findorfail($id);
+        return $this->showOne($categories);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    
+    public function update(Request $request, categories $categories)
     {
-        //
-    }
+        $categories->fill($request->only([
+            'name',
+            'description', 
+        ]));
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        if ($categories->isClean()) {
+            return $this->errorResponse('You Need To Specify Any Different Values to Update' , 422);
+        }
+        $categories->save();
+
+        return $this->showOne($categories);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(categories $categories)
     {
-        //
+        $categories->delete();
+
+        return $this->showOne($categories);
     }
 }

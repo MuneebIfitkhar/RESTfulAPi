@@ -8,6 +8,12 @@ use App\Http\Controllers\Product\productController;
 use App\Http\Controllers\Seller\sellerController;
 use App\Http\Controllers\Transactions\transactionsController;
 use App\Http\Controllers\User\usersController;
+use App\Http\Controllers\Transactions\TransactionCategoryController;
+use App\Http\Controllers\Transactions\TransactionSellerController;
+use App\Http\Controllers\Buyer\BuyerTransactionController;
+use App\Http\Controllers\Buyer\BuyerProductController;
+use App\Http\Controllers\Buyer\BuyerSellerController;
+use App\Http\Controllers\Buyer\BuyerCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +50,20 @@ Route::resource('product',  productController::class ,['only' => ['index' , 'sho
 //transactions
 Route::resource('transactions ',  transactionsController::class ,['only' => ['index' , 'show']]);
 
+//transactiuonCategoryController
+Route::resource('transaction.categories' , transactionCategoryController::class , ['only' => ['index']]);
 
+//transactiuonSellerController
+Route::resource('transaction.seller' , transactionSellerController::class , ['only' => ['index']]);
 
+//BuyerTransactionController
+Route::resource('buyer.transactions' , BuyerTransactionController::class , ['only' => ['index']]);
+
+//BuyerProductController
+Route::resource('buyer.product' , BuyerProductController::class , ['only' => ['index']]);
+
+//BuyerSellerController
+Route::resource('buyer.seller' , BuyerSellerController::class , ['only' => ['index']]);
+
+//BuyerCategoryController
+Route::resource('buyer.category' , BuyerCategoryController::class , ['only' => ['index']]);
