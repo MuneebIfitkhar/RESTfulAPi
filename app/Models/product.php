@@ -9,15 +9,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class product extends Model
 {
     const AVAILABLE_PRODUCT = 'available';
-    const UNAVLABLE_PRODUCT = 'unavailable';
+    const UNAVAILABLE_PRODUCT = 'unavailable';
 
     use HasFactory;
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
+    protected $hidden =['pivot'];
+    
     protected $fillable =[
          'name',
-         'descriotion',
+         'description',
+         'quantity',
          'status',
          'image',
          'seller_id',

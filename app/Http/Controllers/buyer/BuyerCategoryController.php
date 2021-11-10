@@ -19,9 +19,9 @@ class BuyerCategoryController extends ApiController
         $seller = $buyer->transactions()->with('product.categories')
                     ->get()
                     ->pluck('product.categories')
-                    ->collapse();
-                   // ->unique('id')
-                   // ->value();
+                    ->collapse()
+                    ->unique('id')
+                    ->values();
 
         return $this->showAll($seller);
     }

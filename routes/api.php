@@ -14,6 +14,14 @@ use App\Http\Controllers\Buyer\BuyerTransactionController;
 use App\Http\Controllers\Buyer\BuyerProductController;
 use App\Http\Controllers\Buyer\BuyerSellerController;
 use App\Http\Controllers\Buyer\BuyerCategoryController;
+use App\Http\Controllers\Categories\CategoryProductController;
+use App\Http\Controllers\Categories\CategorySellerController;
+use App\Http\Controllers\Categories\CategoryTransactionController;
+use App\Http\Controllers\Categories\CategoryBuyerController;
+use App\Http\Controllers\Seller\SellerTransactionController;
+use App\Http\Controllers\Seller\SellerCategoryController;
+use App\Http\Controllers\Seller\SellerBuyerController;
+use App\Http\Controllers\Seller\SellerProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,3 +75,27 @@ Route::resource('buyer.seller' , BuyerSellerController::class , ['only' => ['ind
 
 //BuyerCategoryController
 Route::resource('buyer.category' , BuyerCategoryController::class , ['only' => ['index']]);
+
+//CategoryProductController
+Route::resource('categories.product' , CategoryProductController::class , ['only' => ['index']]);
+
+//CategorysellerController
+Route::resource('categories.seller' , CategorySellerController::class , ['only' => ['index']]);
+
+//CategorysellerController
+Route::resource('categories.transactions' , CategoryTransactionController::class , ['only' => ['index']]);
+
+//CategorysellerController
+Route::resource('categories.buyer' , CategoryBuyerController::class , ['only' => ['index']]);
+
+//sellerTransactionController
+Route::resource('seller.transactions' , SellerTransactionController::class , ['only' => ['index']]);
+
+//sellerCategoryController
+Route::resource('seller.categories' , SellerCategoryController::class , ['only' => ['index']]);
+
+//SellerBuyerController
+Route::resource('seller.buyer' , SellerBuyerController::class , ['only' => ['index']]);
+
+//SellerProductController
+Route::resource('seller.product' , SellerProductController::class , ['except' => ['create', 'show ' ,'edit']]);
