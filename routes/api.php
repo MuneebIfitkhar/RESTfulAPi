@@ -22,7 +22,10 @@ use App\Http\Controllers\Seller\SellerTransactionController;
 use App\Http\Controllers\Seller\SellerCategoryController;
 use App\Http\Controllers\Seller\SellerBuyerController;
 use App\Http\Controllers\Seller\SellerProductController;
-
+use App\Http\Controllers\Product\ProductTransactionController;
+use App\Http\Controllers\Product\ProductBuyerController;
+use App\Http\Controllers\Product\ProductCategoryController;
+use App\Http\Controllers\Product\ProductBuyerTransactionController; 
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,61 +44,80 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // user route 
 Route::resource('user',  UsersController::class ,['except' =>['create' , 'edit']]);
 
+
+
+
+
+
+
 //buyer route
 Route::resource('buyer',  buyerController::class ,['only' => ['index' , 'show']]);
+//BuyerTransactionController
+Route::resource('buyer.transactions' , BuyerTransactionController::class , ['only' => ['index']]);
+//BuyerProductController
+Route::resource('buyer.product' , BuyerProductController::class , ['only' => ['index']]);
+//BuyerSellerController
+Route::resource('buyer.seller' , BuyerSellerController::class , ['only' => ['index']]);
+//BuyerCategoryController
+Route::resource('buyer.category' , BuyerCategoryController::class , ['only' => ['index']]);
+
+
+
+
 
 //seller
 Route::resource('seller',  sellerController::class ,['only' => ['index' , 'show']]);
+//sellerTransactionController
+Route::resource('seller.transactions' , SellerTransactionController::class , ['only' => ['index']]);
+//sellerCategoryController
+Route::resource('seller.categories' , SellerCategoryController::class , ['only' => ['index']]);
+//SellerBuyerController
+Route::resource('seller.buyer' , SellerBuyerController::class , ['only' => ['index']]);
+//SellerProductController
+Route::resource('seller.product' , SellerProductController::class , ['except' => ['create', 'show ' ,'edit']]);
+
+
+
 
 
 //catagories
 Route::resource('categories',  categoriesController::class ,['except' => ['create' , 'edit']]);
+//CategoryProductController
+Route::resource('categories.product' , CategoryProductController::class , ['only' => ['index']]);
+//CategorysellerController
+Route::resource('categories.seller' , CategorySellerController::class , ['only' => ['index']]);
+//CategorysellerController
+Route::resource('categories.transactions' , CategoryTransactionController::class , ['only' => ['index']]);
+//CategorysellerController
+Route::resource('categories.buyer' , CategoryBuyerController::class , ['only' => ['index']]);
+
+
+
+
 
 //products 
 Route::resource('product',  productController::class ,['only' => ['index' , 'show']]);
+//ProductTransactionController
+Route::resource('product.transactions' , ProductTransactionController::class , ['only' => ['index']]);
+//ProductTransactionController
+Route::resource('product.buyer' , ProductBuyerController::class , ['only' => ['index']]);
+//ProductCategoryController
+Route::resource('product.categories' , ProductCategoryController::class , ['only' => ['index' ,'update','destroy']]);
+//ProductBuyerTransactionController
+Route::resource('product.buyer.transactions' , ProductBuyerTransactionController::class , ['only' => ['store']]);
+
+
+
 
 
 //transactions
 Route::resource('transactions ',  transactionsController::class ,['only' => ['index' , 'show']]);
-
 //transactiuonCategoryController
 Route::resource('transaction.categories' , transactionCategoryController::class , ['only' => ['index']]);
-
 //transactiuonSellerController
 Route::resource('transaction.seller' , transactionSellerController::class , ['only' => ['index']]);
 
-//BuyerTransactionController
-Route::resource('buyer.transactions' , BuyerTransactionController::class , ['only' => ['index']]);
 
-//BuyerProductController
-Route::resource('buyer.product' , BuyerProductController::class , ['only' => ['index']]);
 
-//BuyerSellerController
-Route::resource('buyer.seller' , BuyerSellerController::class , ['only' => ['index']]);
 
-//BuyerCategoryController
-Route::resource('buyer.category' , BuyerCategoryController::class , ['only' => ['index']]);
 
-//CategoryProductController
-Route::resource('categories.product' , CategoryProductController::class , ['only' => ['index']]);
-
-//CategorysellerController
-Route::resource('categories.seller' , CategorySellerController::class , ['only' => ['index']]);
-
-//CategorysellerController
-Route::resource('categories.transactions' , CategoryTransactionController::class , ['only' => ['index']]);
-
-//CategorysellerController
-Route::resource('categories.buyer' , CategoryBuyerController::class , ['only' => ['index']]);
-
-//sellerTransactionController
-Route::resource('seller.transactions' , SellerTransactionController::class , ['only' => ['index']]);
-
-//sellerCategoryController
-Route::resource('seller.categories' , SellerCategoryController::class , ['only' => ['index']]);
-
-//SellerBuyerController
-Route::resource('seller.buyer' , SellerBuyerController::class , ['only' => ['index']]);
-
-//SellerProductController
-Route::resource('seller.product' , SellerProductController::class , ['except' => ['create', 'show ' ,'edit']]);

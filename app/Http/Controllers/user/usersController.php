@@ -84,7 +84,7 @@ class usersController extends ApiController
         if($request->has('email') && $user->email != $request->email)
         {
             $user->verified = User::UNVERIFIED_USER;
-            $user->verification_token = User::generatrVerificationCode();
+            $user->verification_token = User::genrateVerificationCode();
             $user->email = $request->email;
         }
         if($request->has('password'))
@@ -118,5 +118,17 @@ class usersController extends ApiController
         $user->delete();
 
         return $this->showOne($user);
+    }
+
+    public function verify($token)
+    {
+         $user = User::where('verification_token', $token)->firstOrFail();
+
+        $user->verified = User::VERIFIED_USER;
+        $user->verification_token = null;
+
+        $user->save();
+
+        return $this->showMassage('The account has been verified succesfully');
     }
 }

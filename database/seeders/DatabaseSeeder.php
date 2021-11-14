@@ -42,14 +42,18 @@ class DatabaseSeeder extends Seeder
         User::factory()->times($usersQuantity)->create();
        
        
-       //Categories::factory()->has(Role::factory()->count($categoryQuantity))->create();
+        Categories::factory()->times($categoryQuantity)->create();
         
-        Product::factory()->times($productQuantity)->create()->each(
-            function ($product){
+        Product::factory()->times($productQuantity)->create()->each
+        (
+            function ($product)
+            {
                 $categories = Categories::all()->random(mt_rand(1,5))->pluck('id');
-                
-                $product = Categories()->attach($categories);
-            });
+                 
+
+                $product->categories()->attach($categories);
+            }
+        );
     
        Transaction::factory()->times($transactionQuantity)->create();
     }

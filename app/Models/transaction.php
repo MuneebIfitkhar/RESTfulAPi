@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Model\Buyer;
+use App\Model\Product;
 
 class transaction extends Model
 {
@@ -24,7 +26,7 @@ class transaction extends Model
         return $this->belongsTo(Buyer::class);
     }
     
-    public function product()
+    public function products()
     {
         return $this->belongsTo(Product::class);
     }

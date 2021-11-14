@@ -29,4 +29,9 @@ trait ApiResponser
     {
         return $this->successResponse(['data' => $model], $code);
     }
+
+    protected function showMassage($massage , $code = 200)
+    {
+        return $this->successResponse(['data' => $massage], $code);
+    }
 }

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\product; 
+use App\Models\Product; 
 
 
 class seller extends User

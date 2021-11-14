@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\User\usersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,3 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
+
+
+//Route::get('user/verify/{token}', 'usersController@verify')->name('verify');
+ Route::name('verify')->get('user/verify/{token}', [ usersController::class ,'verify']);
+

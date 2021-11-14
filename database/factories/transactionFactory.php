@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\trasaction;
+use App\Models\transaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Seller;
+use App\Models\User;
 
 class transactionFactory extends Factory
 {
@@ -12,7 +14,7 @@ class transactionFactory extends Factory
      *
      * @var string
      */
-    protected $model = trasaction::class;
+    protected $model = transaction::class;
 
     /**
      * Define the model's default state.
@@ -21,13 +23,13 @@ class transactionFactory extends Factory
      */
     public function definition()
     {
-        $seller = Seller::has('product')->get()->random();
+        $seller = Seller::has('products')->get()->random();
         $buyer = User::all()->except($seller->id)->random();
 
         return [
-            'quantity' =>$faker->numberBetween(1,3),
+            'quantity' =>$this->faker->numberBetween(1,3),
             'buyer_id' => $buyer->id,
-            'product_id' => $seller->product->random()->id,
+            'product_id' => $seller->products->random()->id,
         ];
     }
 }

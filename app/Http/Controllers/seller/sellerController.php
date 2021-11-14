@@ -16,7 +16,7 @@ class sellerController extends ApiController
      */
     public function index()
     {
-        $sellers = Seller::has('product')->get();
+        $sellers = Seller::has('products')->get();
 
         return $this->showAll($sellers);
     }
@@ -30,7 +30,7 @@ class sellerController extends ApiController
      */
     public function show($id)
     {
-        $sellers = Seller::has('product')->findorfail($id);
+        $sellers = Seller::has('products')->findorfail($id);
 
         return $this->showOne($sellers);
     }
